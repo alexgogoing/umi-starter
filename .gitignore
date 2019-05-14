@@ -16,7 +16,10 @@
 .umi-production
 
 /.idea
+.idea
 /.vscode
 /mock
 
 ._*
+
+/test
