@@ -1,20 +1,37 @@
+let base = 'http://xxx';
 
-// ref: https://umijs.org/config/
 export default {
+  publicPath: '/dist/',
+  theme: {
+    'primary-color': 'rgba(211, 149, 14, 1.000)',
+  },
   plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
-      antd: false,
-      dva: false,
-      dynamicImport: false,
-      title: 'umi-starter',
-      dll: false,
-      hardSource: false,
-      routes: {
-        exclude: [
-          /components/,
-        ],
+      antd: true,
+      // dynamicImport: {
+      //   loadingComponent: './framework/loading',
+      //   webpackChunkName: true,
+      // },
+      dll: {
+        include: [
+          'antd',
+          'react',
+          'react-dom',
+        ]
       },
     }],
   ],
-}
+  proxy: {
+    '/rest': {
+      target: base + '/rest',
+      pathRewrite: { '^/rest': '' },
+      changeOrigin: true,
+    },
+    '/api': {
+      target: base + '/api',
+      pathRewrite: { '^/api': '' },
+      changeOrigin: true
+    },
+  },
+
+};
